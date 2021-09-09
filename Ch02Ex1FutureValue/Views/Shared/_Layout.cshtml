@@ -1,0 +1,20 @@
+﻿@*This is a Razor Layout, it provides a way to store the elements that are common to multiple web pages.*@
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+

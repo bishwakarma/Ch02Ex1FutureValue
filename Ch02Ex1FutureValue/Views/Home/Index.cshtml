@@ -1,0 +1,54 @@
+﻿@* This is a cshtml razor view controller file for View Folder.*@
+@*Using the model directive to bind the model to the view. This allows the view to use asp-for tag helper to bind HTL elements to the corresponding
+    prpperties of the Object. This is called a strongly Typed View.
+    Specific to this app this tag helper binds the MonthlyInvestment, YearlyInterestRate, and Years properties to html labels and input elements in the View*@
+@*Using Razor Code block to to set the title for the page.*@
+@model Ch02Ex1FutureValue.Models.FutureValueModel
+@{
+    //Setting the Title Property of the ViewBag object to Future Value Calculator. Hence, the layout for the page gets this property and displays as a Title to the Client.
+
+    ViewBag.Title = "Future Value Calculator";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home Page</title>
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Future Value Calculator</h1>
+    <!--Razor view using 'at' symbol to to access the ViewBag Property from the main Controller folder>HomeController.cs file -->
+    <!--Here my form element is using asp-action tag helper.
+        This makes MVC to use Index() acton method of the HomeController.cs Controller.-->
+    <form asp-action="Index" method="post">
+        <!--View that displays the summary of Validation Messages-->
+        <div asp-validation-summary="All"></div>
+        <!--Below I have used asp-for tag helpers to access the properties from my Home Controller-->
+        <div>
+            <label asp-for="MonthlyInvestment">Monthly Investment: </label>
+            <input asp-for="MonthlyInvestment"/>
+        </div>
+
+        <div>
+            <label asp-for="YearlyInterestRate">Yearly Interest Rate: </label>
+            <input asp-for="YearlyInterestRate"/>
+        </div>
+
+        <div>
+            <label>Number of Years: </label>
+            <input asp-for="NumOfYears"/>
+        </div>
+        <div>
+            <label>Future Value: </label>
+            <!-- Calling the FV property from the HomeController.cs file. Using .ToString() method to convert the decimal value to a string with a currency format of 2 decimal places-->
+            <label>@ViewBag.FV.ToString("C2") </label>
+        </div>
+        <button type="submit">Calculate</button>
+        <!--The asp-acton tag helper takes the client back to the Indev file for a fresh start to begin with entering data for a next session request-->
+        <a asp-action="Index">Clear</a>
+    </form>
+</body>
+</html>
